@@ -1,6 +1,8 @@
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { useState, useRef } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import Feather from '@expo/vector-icons/Feather';
 
 export default function CameraScreen({navigation}) {
   const [facing, setFacing] = useState<CameraType>('back');
@@ -48,14 +50,17 @@ export default function CameraScreen({navigation}) {
                   facing={facing}
                   ref={ref}>
         <View style={styles.buttonContainer}>
-        
-        <TouchableOpacity style={styles.button} onPress={takePhoto}>
-            <Text style={styles.text}>Take photo</Text>
-        </TouchableOpacity>
-      
-         <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-            <Text style={styles.text}>Flip camera</Text>
+          
+          <View style={styles.button} />
+          <TouchableOpacity style={styles.button} onPress={takePhoto}>
+              <Feather name="circle" size={60} color="white" />
+              {/* <Text style={styles.text}>Take photo</Text> */}
           </TouchableOpacity>
+        
+          <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
+              <Ionicons name="camera-reverse" size={24} color="white" />
+              {/* <Text style={styles.text}>Flip camera</Text> */}
+            </TouchableOpacity>
         </View>
       </CameraView>
     </View>
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
   },
   message: {
     textAlign: 'center',
-    paddingBottom: 10,
+    paddingBottom: 15,
   },
   camera: {
     flex: 1,
@@ -77,17 +82,17 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
     backgroundColor: 'transparent',
     alignContent : 'center',
     justifyContent: 'flex-end',
     // margin: 64,
   },
   button: {
-    // flex: 1,
+    flex: 1,
     // flexDirection: 'column',
-    // alignSelf: 'flex-end',
-    padding: 10,
+    alignSelf: 'flex-end',
+    paddingBottom: 15,
     alignItems: 'center',
   },
   text: {
