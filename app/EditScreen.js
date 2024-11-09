@@ -31,8 +31,6 @@ export default function EditScreen({navigation}) {
         comments: ["comments"]
     }
 
-
-
     // Format for SectionList
     const sectionListData = Object.keys(groups).map((key) => ({
         title: key,
@@ -45,14 +43,14 @@ export default function EditScreen({navigation}) {
 
     const ListField = ({label, value}) => (
         <View style={styles.fieldContainer}>
-            <Text style={styles.fieldLabel}>{capitalizeFirstLetter(label)}</Text>
-            <TextInput style={styles.fieldValue}>{value}</TextInput>
+            <Text multiline={true} style={styles.fieldLabel}>{capitalizeFirstLetter(label)}</Text>
+            <TextInput multiline={true} style={styles.fieldValue}>{value}</TextInput>
         </View>
     );
 
     return (
-        <ThemedView>
-            <ThemedText type="title">Edit Screen</ThemedText>
+        <ThemedView style={styles.screenContainer}>
+            <ThemedText style={styles.title} type="title">Edit Data</ThemedText>
             <SectionList
                 sections={sectionListData}
                 keyExtractor={(item, index) => item + index}
@@ -60,10 +58,11 @@ export default function EditScreen({navigation}) {
                 renderSectionHeader={({section: {title}}) => (
                     <Text style={styles.sectionHeader}>{capitalizeFirstLetter(title)}</Text>
                 )}
+                style={styles.sectionList}            
             />
             <TouchableOpacity 
                 onPress={confirmCallback}
-                style={styles.button}
+                style={styles.confirmButton}
                 >
                 <Text >Confirm</Text>
             </TouchableOpacity>
@@ -72,22 +71,45 @@ export default function EditScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
+    screenContainer: {
+        height: "100%"
+    },
+    title: {
+        fontSize: 32,
+        // textAlign: 'center',
+        padding: 5,
+    },
     fieldContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        margin: 10,
+        padding: 5,
+        // borderWidth: 5,
+        // borderColor: 'yellow'
+
     },
     fieldLabel: {
         fontSize: 20,
+        padding: 5,
+        maxWidth: "35%",
     },
     fieldValue: {
         fontSize: 20,
+        padding: 5,
+        maxWidth: "65%",
+        // borderColor: 'yellow'
+        // borderWidth: 5,
     },
     sectionHeader: {
         fontSize: 24,
         backgroundColor: 'lightgrey',
+        padding: 3,
     },
-    button: {
+    sectionList: {
+        height: 100,
+        // borderWidth: 5,
+        // borderColor: 'yellow'
+    },
+    confirmButton: {
         alignItems: 'center',
         backgroundColor: 'orange',
         padding: 10,
